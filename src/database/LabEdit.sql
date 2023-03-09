@@ -96,3 +96,17 @@ DROP TABLE likes_dislikes;
  ("U003","P3",0);
 
 
+CREATE TABLE likes_dislikes_coments(
+    user_id TEXT NOT NULL, 
+    coment_id TEXT NOT NULL, 
+    like INTEGER,
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY (coment_id) REFERENCES coments(id));
+INSERT INTO likes_dislikes_coments (user_id, coment_id, like)
+ VALUES
+ ("U001","C1",0),
+ ("U002","C2",1),
+ ("U003","C2",0);
+SELECT * FROM likes_dislikes_coments;
+DROP TABLE likes_dislikes_coments;
+
