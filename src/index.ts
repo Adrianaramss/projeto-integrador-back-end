@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express'
+import { userRouter } from './Router/userRouter'
 import dotenv from "dotenv"
 import cors from "cors"
 
@@ -29,3 +30,5 @@ app.get("/ping", async (req: Request, res: Response) => {
         }
     }
 })
+
+app.use("/users", userRouter)
