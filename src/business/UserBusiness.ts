@@ -3,7 +3,6 @@ import { GetUsersInput, GetUsersOutput, LoginInput, LoginOutput, SignupInput, Si
 import { BadRequestError } from "../errors/BadRequestError"
 import { NotFoundError } from "../errors/NotFoundErro"
 import { User } from "../models/User"
-import { USER_ROLES } from "../types"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager } from "../services/TokenManager"
 import { TokenPayload } from "../services/TokenManager"
@@ -26,10 +25,9 @@ export class UserBusiness {
         const users = usersDB.map((userDB) => {
             const user = new User(
                 userDB.id,
-                userDB.name,
+                userDB.nickname,
                 userDB.email,
                 userDB.password,
-                userDB.role,
                 userDB.created_at
             )
 
@@ -42,11 +40,11 @@ export class UserBusiness {
     }
 
     public signup = async (input: SignupInput): Promise<SignupOutput> => {
-        const { name, email, password } = input
+        const { nickname, email, password } = input
 
       
 
-        if (typeof name !== "string") {
+        if (typeof nickname !== "string") {
             throw new BadRequestError("'name' deve ser string")
         }
 
@@ -64,10 +62,9 @@ export class UserBusiness {
 
         const newUser = new User(
             id,
-            name,
+            nickname,
             email,
             password,
-            USER_ROLES.NORMAL, 
             new Date().toISOString()
         )
 
@@ -76,8 +73,7 @@ export class UserBusiness {
 
         const tokenPayload: TokenPayload = {
             id: newUser.getId(),
-            name: newUser.getName(),
-            role: newUser.getRole()
+            nickname: newUser.getNickname()
         }
 
         const token = this.tokenManager.createToken(tokenPayload)
@@ -113,8 +109,7 @@ export class UserBusiness {
 
         const tokenPayload: TokenPayload = {
             id: userDB.id,
-            name: userDB.name,
-            role: userDB.role
+            nickname: userDB.nickname,
         }
 
         const token = this.tokenManager.createToken(tokenPayload)

@@ -41,7 +41,7 @@ export class UserController {
         try {
             const input: SignupInput = {
                 // id: req.body.id,
-                name: req.body.name,
+                nickname: req.body.nickname,
                 email: req.body.email,
                 password: req.body.password
             }
