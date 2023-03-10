@@ -2,10 +2,9 @@
 
 CREATE TABLE users (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
-    name TEXT NOT NULL,
+    nickname TEXT NOT NULL,
 	email TEXT UNIQUE NOT NULL,
 	password TEXT NOT NULL,
-    role TEXT NOT NULL,
     created_at TEXT DEFAULT (DATETIME()) NOT NULL
 );
 
@@ -14,25 +13,24 @@ SELECT *FROM users;
  DROP TABLE users;
 
  
-INSERT INTO users (id, name, email, password, role)
+INSERT INTO users (id, nickname, email, password)
 VALUES
-   ("U001", "Adriana", "adriana@gmail.com", "adriana123","admin"),
-   ("U002", "Ezequiel", "ezequiel@gmail.com", "ezequiel","normal"),
-   ("U003", "Poliana", "poliana@gmail.com", "poliana10", "normal");
+   ("U001", "Drica", "adriana@gmail.com", "adriana123"),
+   ("U002", "Ze", "ezequiel@gmail.com", "ezequiel"),
+   ("U003", "Poli", "poliana@gmail.com", "poliana10");
 
 
 
 CREATE TABLE posts (
-    id TEXT PRIMARY KEY UNIQUE NOT NULL,
-    creator_id TEXT NOT NULL,
-    content TEXT NOT NULL,
-    coment INTEGER DEFAULT(0) NOT NULL,
-    likes INTEGER DEFAULT(0) NOT NULL,
-    dislikes INTEGER DEFAULT(0) NOT NULL,
-    created_at TEXT DEFAULT (DATETIME()) NOT NULL,
-    updated_at TEXT DEFAULT (DATETIME()) NOT NULL,
-    FOREIGN KEY (creator_id) REFERENCES users(id)
-);
+    id TEXT PRIMARY KEY UNIQUE NOT NULL, 
+    creator_id TEXT NOT NULL, 
+    content TEXT, 
+    comments INTEGER DEFAULT(0) NOT NULL,
+    likes INTEGER DEFAULT(0) NOT NULL, 
+    dislikes INTEGER DEFAULT(0) NOT NULL, 
+    created_at TEXT DEFAULT(DATETIME()) NOT NULL, 
+    FOREIGN KEY (creator_id) REFERENCES users (id))
+;
 
 
 SELECT *FROM posts;
@@ -44,38 +42,36 @@ VALUES
    ("P2","U002","A vida reflete aquilo que você sente. Sinta gratidão!"),
    ("P3","U003","Amanhã começo minha jornada como dev!");
 
-CREATE TABLE coments (
+CREATE TABLE comments_posts (
     id TEXT PRIMARY KEY UNIQUE NOT NULL, 
     creator_id TEXT NOT NULL, 
     content TEXT,
     likes INTEGER DEFAULT(0) NOT NULL, 
-    dislikes INTEGER DEFAULT(0) NOT NULL, 
     created_at TEXT DEFAULT(DATETIME()) NOT NULL, 
-    updated_at TEXT DEFAULT(DATETIME()) NOT NULL,
     post_id TEXT NOT NULL,
     FOREIGN KEY (creator_id) REFERENCES users (id),
     FOREIGN KEY (post_id) REFERENCES posts (id)
 );
 
-INSERT INTO coments (id, creator_id, content, post_id)
+INSERT INTO comments_posts (id, creator_id, content, post_id)
 VALUES
 ("C1", "U002","Que cachorro lindo!","P1"),
 ("C2", "U001","concordo com você!","P2"),
 ("C3", "U002", "Parabéns!!!","P3");
 
 
-SELECT *FROM coments;
-DROP TABLE coments;
+SELECT *FROM comments_posts;
+DROP TABLE comments_posts;
 
 
 SELECT coments.id, 
 coments.content,
 users.id,
-users.name
+users.nickname
 FROM coments LEFT JOIN users
 ON users.id = coments.creator_id;
 
-CREATE TABLE likes_dislikes (
+CREATE TABLE posts_like_dislike (
         user_id TEXT NOT NULL,
         post_id TEXT NOT NULL,
         like INTEGER NOT NULL,
@@ -85,28 +81,28 @@ CREATE TABLE likes_dislikes (
 
 
 
-DROP TABLE likes_dislikes;
+DROP TABLE  posts_like_dislike;
 
- SELECT *From likes_dislikes;
+ SELECT *From  posts_like_dislike;
 
- INSERT INTO likes_dislikes (user_id, post_id, like)
+ INSERT INTO  posts_like_dislike (user_id, post_id, like)
  VALUES
  ("U001","P1",0),
  ("U002","P2",1),
  ("U003","P3",0);
 
 
-CREATE TABLE likes_dislikes_coments(
+CREATE TABLE comments_likes_dislikes(
     user_id TEXT NOT NULL, 
-    coment_id TEXT NOT NULL, 
+    comment_id TEXT NOT NULL, 
     like INTEGER,
     FOREIGN KEY(user_id) REFERENCES users(id),
-    FOREIGN KEY (coment_id) REFERENCES coments(id));
-INSERT INTO likes_dislikes_coments (user_id, coment_id, like)
+    FOREIGN KEY (comment_id) REFERENCES coments(id));
+INSERT INTO  comments_likes_dislikes (user_id, comment_id, like)
  VALUES
  ("U001","C1",0),
- ("U002","C2",1),
+ ("U002","C2",0),
  ("U003","C2",0);
-SELECT * FROM likes_dislikes_coments;
-DROP TABLE likes_dislikes_coments;
+SELECT * FROM  comments_likes_dislikes;
+DROP TABLE  comments_likes_dislikes;
 
