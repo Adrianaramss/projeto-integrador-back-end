@@ -45,8 +45,9 @@ VALUES
 CREATE TABLE comments_posts (
     id TEXT PRIMARY KEY UNIQUE NOT NULL, 
     creator_id TEXT NOT NULL, 
-    content TEXT,
+    content TEXT NOT NULL,
     likes INTEGER DEFAULT(0) NOT NULL, 
+    dislikes INTEGER DEFAULT(0) NOT NULL, 
     created_at TEXT DEFAULT(DATETIME()) NOT NULL, 
     post_id TEXT NOT NULL,
     FOREIGN KEY (creator_id) REFERENCES users (id),
@@ -71,7 +72,7 @@ users.nickname
 FROM coments LEFT JOIN users
 ON users.id = coments.creator_id;
 
-CREATE TABLE posts_like_dislike (
+CREATE TABLE like_dislike (
         user_id TEXT NOT NULL,
         post_id TEXT NOT NULL,
         like INTEGER NOT NULL,
@@ -81,11 +82,11 @@ CREATE TABLE posts_like_dislike (
 
 
 
-DROP TABLE  posts_like_dislike;
+DROP TABLE  like_dislike;
 
- SELECT *From  posts_like_dislike;
+ SELECT *From  like_dislike;
 
- INSERT INTO  posts_like_dislike (user_id, post_id, like)
+ INSERT INTO  like_dislike (user_id, post_id, like)
  VALUES
  ("U001","P1",0),
  ("U002","P2",1),
