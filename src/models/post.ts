@@ -66,7 +66,6 @@ export class Post {
     }
 
   
-
     public getCreatorId(): string {
         return this.creatorId
     }

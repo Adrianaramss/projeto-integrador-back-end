@@ -22,8 +22,9 @@ export interface CreateCommentOutputDTO {
     content: string
 }
 
-
-export interface CreateCommentInputDTO {
+export interface LikeDislikeCommentInputDTO {
+    idToLikeOrDislike: string,
     token: string | undefined,
-    content: unknown
+    like: unknown
 }
+

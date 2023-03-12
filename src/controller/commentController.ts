@@ -3,7 +3,7 @@ import { CommentBusiness } from "../business/CommentBusiness"
 import {  GetCommentsInputDTO} from "../dtos/CommentDTO"
 import { BaseError } from "../errors/BaseError"
 import { CreateCommentInputDTO } from "../dtos/CommentDTO"
-
+import { LikeDislikeCommentInputDTO } from "../dtos/CommentDTO"
 export class CommentController {
     constructor(
         private commentBusiness: CommentBusiness,
@@ -53,5 +53,27 @@ export class CommentController {
         }
     }
 
+    public likeDislike = async (req: Request, res: Response) => {
+        try {
 
+            const input: LikeDislikeCommentInputDTO = {
+                idToLikeOrDislike: req.params.id,
+                token: req.headers.authorization,
+                like: req.body.like
+            }
+           
+            await this.commentBusiness.likeOrDislikeComment(input)
+
+            res.status(200).end()
+        } catch (error) {
+            console.log(error)
+
+            if (error instanceof BaseError) {
+                res.status(error.statusCode).send(error.message)
+            } else {
+                res.send("Erro inesperado")
+            }
+        }
+    }
+    
 }

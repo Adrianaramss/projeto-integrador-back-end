@@ -94,16 +94,18 @@ DROP TABLE  like_dislike;
 
 
 CREATE TABLE comments_likes_dislikes(
+    post_id TEXT NOT NULL,
     user_id TEXT NOT NULL, 
     comment_id TEXT NOT NULL, 
     like INTEGER,
     FOREIGN KEY(user_id) REFERENCES users(id),
-    FOREIGN KEY (comment_id) REFERENCES coments(id));
-INSERT INTO  comments_likes_dislikes (user_id, comment_id, like)
+    FOREIGN KEY(post_id) REFERENCES posts(id),
+    FOREIGN KEY (comment_id) REFERENCES comments_posts(id));
+INSERT INTO  comments_likes_dislikes (user_id, post_id, comment_id, like)
  VALUES
- ("U001","C1",0),
- ("U002","C2",0),
- ("U003","C2",0);
+ ("U002","P1","C1",0),
+ ("U001","P2","C2",0),
+ ("U002","P3","C3",0);
 SELECT * FROM  comments_likes_dislikes;
 DROP TABLE  comments_likes_dislikes;
 

@@ -103,3 +103,14 @@ export interface CommentModel {
     createdAt: string
 }
 
+export interface LikeDislikeCommentDB {
+    post_id: string,
+    comment_id: string,
+    user_id: string,
+    like: number
+}
+export enum COMMENT_LIKE{
+    ALREADY_LIKED = "ALREADY LIKED",
+    ALREADY_DISLIKED = "ALREADY DISLIKED"
+
+}
