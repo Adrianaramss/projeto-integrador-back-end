@@ -6,11 +6,16 @@ import { User } from "../models/User"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager } from "../services/TokenManager"
 import { TokenPayload } from "../services/TokenManager"
+import { UserDB } from "../Types"
+
+
+
 export class UserBusiness {
     constructor(
         private userDatabase: UserDatabase,
         private idGenerator: IdGenerator,
-        private tokenManager: TokenManager
+        private tokenManager: TokenManager,
+
     ) {}
 
     public getUsers = async (input: GetUsersInput): Promise<GetUsersOutput> => {
@@ -45,7 +50,7 @@ export class UserBusiness {
       
 
         if (typeof nickname !== "string") {
-            throw new BadRequestError("'name' deve ser string")
+            throw new BadRequestError("'nickname' deve ser string")
         }
 
         if (typeof email !== "string") {
@@ -97,10 +102,11 @@ export class UserBusiness {
             throw new Error("'password' deve ser string")
         }
 
-        const userDB = await this.userDatabase.findUserByEmail(email)
+        // const userDB = await this.userDatabase.findUserByEmail(email)
+        const userDB: UserDB | undefined = await this.userDatabase.findUserByEmail(email)
 
         if (!userDB) {
-            throw new NotFoundError("'email' não encontrado")
+            throw new NotFoundError("'email' não cadastrado")
         }
 
         if (password !== userDB.password) {

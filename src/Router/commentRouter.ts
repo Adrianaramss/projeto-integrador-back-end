@@ -19,3 +19,4 @@ const commentController = new CommentController(
 commentRouter.get("/", commentController.getComment)
 commentRouter.post("/:id", commentController.CreateComment)
 commentRouter.put("/:id/like", commentController.likeDislike)
+commentRouter.get("/:id", commentController.getCommentById)

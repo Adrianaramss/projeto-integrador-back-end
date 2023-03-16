@@ -61,6 +61,7 @@ export interface PostModel {
 }
 
 export interface PostCreatorDB extends PostDB {
+    updated_at: string
     creator_name: string
 }
 
@@ -92,7 +93,9 @@ export interface CommentDB {
 export interface CommentWithCreatorDB extends CommentDB {
     creator_name: string
 }
-
+export interface PostWithCreatorDB extends PostDB {
+    creator_nickname: string
+}
 export interface CommentModel {
     id: string,
     postId: string,
@@ -113,4 +116,9 @@ export enum COMMENT_LIKE{
     ALREADY_LIKED = "ALREADY LIKED",
     ALREADY_DISLIKED = "ALREADY DISLIKED"
 
+}
+
+export interface GetCommentInputDTO {
+    id: string,
+    token: string | undefined
 }

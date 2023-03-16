@@ -13,7 +13,7 @@ const userController = new UserController(
         new UserBusiness(
         new UserDatabase(),
         new IdGenerator(),
-        new TokenManager()
+        new TokenManager(),
     )
 )
 

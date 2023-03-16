@@ -4,6 +4,12 @@ import {  GetCommentsInputDTO} from "../dtos/CommentDTO"
 import { BaseError } from "../errors/BaseError"
 import { CreateCommentInputDTO } from "../dtos/CommentDTO"
 import { LikeDislikeCommentInputDTO } from "../dtos/CommentDTO"
+import { GetCommentInputDTO } from "../Types"
+
+
+
+
+
 export class CommentController {
     constructor(
         private commentBusiness: CommentBusiness,
@@ -76,4 +82,27 @@ export class CommentController {
         }
     }
     
+    public getCommentById = async (req: Request, res: Response) => {
+        try {
+            const input: GetCommentInputDTO  = {
+                id: req.params.id,
+                token: req.headers.authorization
+            }
+
+            const output = await this.commentBusiness.getCommentById(input)
+
+            res.status(200).send(output)
+        } catch (error) {
+            console.log(error)
+
+            if (error instanceof BaseError) {
+                res.status(error.statusCode).send(error.message)
+            } else {
+                res.send("Erro inesperado")
+            }
+        }
+    }
+
+
+
 }

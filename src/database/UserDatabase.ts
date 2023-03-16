@@ -39,6 +39,14 @@ export class UserDatabase extends BaseDatabase {
         return userDB
     }
 
+    public getUsers = async (): Promise<UserDB[]> => {
+        const result: UserDB[] = await BaseDatabase
+            .connection(UserDatabase.TABLE_USERS)
+            .select()
+
+        return result
+}
+
     public async insertUser(newUserDB: UserDB) {
         await BaseDatabase
             .connection(UserDatabase.TABLE_USERS)
