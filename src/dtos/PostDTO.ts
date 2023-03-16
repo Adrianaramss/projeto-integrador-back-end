@@ -3,6 +3,11 @@ import { PostModel } from './../types';
 
 export interface GetPostsInput {
     token: string | undefined
+    id: string,
+
+}
+export interface GetPostInput {
+    token: string | undefined
 }
 
 export type GetPostsOutput = PostModel[]

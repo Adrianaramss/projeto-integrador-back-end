@@ -2,6 +2,9 @@ import { CommentWithCreatorDB,CommentDB, LikeDislikeCommentDB,COMMENT_LIKE } fro
 import { BaseDatabase } from "./BaseDatabase";
 
 export class CommentDatabase extends BaseDatabase {
+    static getCommentWithCreators() {
+        throw new Error("Method not implemented.");
+    }
 
     public static TABLE_COMMENT = "comments_posts"
     public static TABLE_LIKES_DISLIKES = "likes_dislikes"
@@ -112,4 +115,15 @@ export class CommentDatabase extends BaseDatabase {
             .connection(CommentDatabase.TABLE_COMMENT_LIKES_DISLIKES)
             .insert(likeDislike)
     }
+
+    public findCommentById = async (id: string): Promise<CommentDB | undefined> => {
+        const result: CommentDB[] = await BaseDatabase
+            .connection(CommentDatabase.TABLE_COMMENT)
+            .select()
+            .where({ id })
+
+        return result[0]
+    }
+
+
 }

@@ -108,3 +108,5 @@ export class Comment {
         }
     }
 }
+
+export { CommentModel }

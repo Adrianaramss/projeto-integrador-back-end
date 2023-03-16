@@ -2,14 +2,15 @@ import { CommentDatabase } from "../database/CommentDatabase"
 import { PostDatabase } from "../database/PostDatabase"
 import { GetCommentOutputDTO, GetCommentsInputDTO} from "../dtos/CommentDTO"
 import { BadRequestError } from "../errors/BadRequestError"
-import { Comment } from "../models/Comment"
+import { Comment,CommentModel } from "../models/Comment"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager } from "../services/TokenManager"
 import {  CommentWithCreatorDB,LikeDislikeCommentDB, COMMENT_LIKE } from "../types"
 import { CreateCommentInputDTO } from "../dtos/CommentDTO"
 import { NotFoundError } from "../errors/NotFoundErro"
 import { LikeDislikeCommentInputDTO } from "../dtos/CommentDTO"
-import { BaseDatabase } from "../database/BaseDatabase"
+import { GetCommentInputDTO } from "../types"
+
 export class CommentBusiness {
     constructor(
         private commentDatabase: CommentDatabase,
@@ -173,5 +174,40 @@ export class CommentBusiness {
         await this.commentDatabase.updateComment(updatedCommentDB, idToLikeOrDislike)
     }
     
+
+    public getCommentById = async (input:GetCommentInputDTO): Promise<CommentModel> => {
+
+        const { id, token } = input
+
+        if (token === undefined) {
+            throw new BadRequestError("token é necessário")
+        }
+
+        const payload = this.tokenManager.getPayload(token)
+
+        if (payload === null) {
+            throw new BadRequestError("'token' inválido")
+        }
+
+        const commentsDB = await this.commentDatabase.findCommentById(id)
+
+        if (!commentsDB) {
+            throw new NotFoundError("'id' não existe")
+        }
+
+        const comment = new Comment(
+            commentsDB.id,
+            commentsDB.post_id,
+            commentsDB.creator_id,
+            commentsDB.content,
+            commentsDB.likes,
+            commentsDB.dislikes,
+            commentsDB.created_at,
+        ).toBusinessModel()
+
+        return comment
+
+
 }
 
+}

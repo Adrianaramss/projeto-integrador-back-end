@@ -1,10 +1,11 @@
 import { PostDatabase } from "../database/PostDatabase"
+import { UserDatabase } from "../database/UserDatabase"
 import { BadRequestError } from "../errors/BadRequestError"
 import { Post } from "../models/post"
 import { PostCreatorDB } from "../types"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager } from "../services/TokenManager"
-import { EditPostInputDTO, GetPostsInput } from "../dtos/PostDTO"
+import { EditPostInputDTO } from "../dtos/PostDTO"
 import { GetPostsOutput } from "../dtos/PostDTO"
 import { CreatePostInputDTO } from "../dtos/PostDTO"
 import { DeletePostInputDTO } from "../dtos/PostDTO"
@@ -12,6 +13,8 @@ import { NotFoundError } from "../errors/NotFoundErro"
 import { LikeDislikeDB } from "../types"
 import { LikesDislikesInputDTO } from "../dtos/LikeDislikeDTO"
 import { POST_LIKE } from "../types"
+import { GetPostInput } from "../dtos/PostDTO"
+import { CommentDatabase } from "../database/CommentDatabase"
 
 export class PostBusiness {
     
@@ -21,7 +24,7 @@ export class PostBusiness {
         private tokenManager: TokenManager,
     ){}
     public getPosts = async (
-        input: GetPostsInput
+        input: GetPostInput
         ): Promise<GetPostsOutput> => {
         const {  token } = input
 
@@ -274,8 +277,62 @@ export class PostBusiness {
         await this.postDatabase.update(idToLikeDislike, updatePostDB)
     }
 
+    public getPostComments = async (input: GetPostInput) => {
 
+        const { token } = input
+        console.log(input);
+        
+        if (token === undefined) {
+            throw new BadRequestError("token é necessário")
+        }
 
+        const payload = this.tokenManager.getPayload(token)
 
+        if (payload === null) {
+            throw new BadRequestError("'token' inválido")
+        }
+
+        const posts = await this.postDatabase.getPosts()
+
+        const userDatabase = new UserDatabase()
+
+        const users = await userDatabase.getUsers()
+
+        const commentsDatabase = new CommentDatabase()
+
+        const comments = await commentsDatabase.getCommentWithCreators()
+
+        const resultPost = posts.map((post) => {
+
+           const contador = comments.filter((comment) => {
+                return comment.post_id === post.id
+            })
+
+            return {
+                id: post.id,
+                content: post.content,
+                likes: post.likes,
+                dislikes: post.dislikes,
+                comments: contador.length,
+                created_at: post.created_at,
+                creator: resultUser(post.creator_id),
+                comentario: contador
+            }
+        })
+
+        function resultUser(user: string) {
+            const resultTable = users.find((result) => {
+                return user === result.id
+            })
+
+            return {
+                id: resultTable?.id,
+                nickname: resultTable?.nickname
+            }
+        }
+
+        return ({ Postagens: resultPost })
+    }
+  
 
 }

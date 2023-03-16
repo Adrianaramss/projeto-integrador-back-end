@@ -4,7 +4,7 @@ import { BaseError } from "../errors/BaseError"
 import { CreatePostInputDTO, EditPostInputDTO, GetPostsInput } from "../dtos/PostDTO"
 import { DeletePostInputDTO } from "../dtos/PostDTO"
 import { LikesDislikesInputDTO } from "../dtos/LikeDislikeDTO"
-
+import { GetPostInput } from "../dtos/PostDTO"
 
 export class PostController {
     constructor(
@@ -13,7 +13,7 @@ export class PostController {
 
   public getPosts = async (req: Request, res: Response) => {
     try {
-          const input: GetPostsInput = {
+          const input: GetPostInput = {
               token: req.headers.authorization
           }
 
@@ -118,5 +118,24 @@ public likeOrDislikePost = async (req: Request, res: Response) => {
     }
 }
 
+public getPostComment = async (req: Request, res: Response) => {
+    try {
+        const input: GetPostInput = {
+            token: req.headers.authorization
+        }
+
+        const output = await this.postBusiness.getPostComments(input)
+
+        res.status(200).send(output)
+    } catch (error) {
+        console.log(error)
+
+        if (error instanceof BaseError) {
+            res.status(error.statusCode).send(error.message)
+        } else {
+            res.send("Erro inesperado")
+        }
+    }
+}
 
 }

@@ -7,6 +7,7 @@ import { POST_LIKE } from "../types";
 export class PostDatabase extends BaseDatabase {
     public static TABLE_POSTS = "posts"
     public static TABLE_LIKES_DISLIKES = "likes_dislikes"
+    public static TABLE_COMMENT = "comments_posts"
 
     public getPostCreators = async (): Promise<PostCreatorDB[]> => {
         const result: PostCreatorDB[] = await BaseDatabase
@@ -77,6 +78,13 @@ export class PostDatabase extends BaseDatabase {
 
         return result[0]
     }
+    public getPosts = async (): Promise<PostDB[]> => {
+        const result: PostDB[] = await BaseDatabase
+            .connection(PostDatabase.TABLE_POSTS)
+            .select()
+
+        return result
+    }
 
 
     public likeOrDislikePost = async (likeDislike: LikeDislikeDB): Promise <void> =>{
@@ -121,5 +129,5 @@ export class PostDatabase extends BaseDatabase {
         })
     }
 
-
+        
 }
