@@ -1,9 +1,9 @@
 import { Request, Response } from "express"
 import { CommentBusiness } from "../business/CommentBusiness"
-import {  GetCommentsInputDTO} from "../dtos/CommentDTO"
+import {  GetCommentsInputDTO} from "../dtos/commentDto"
 import { BaseError } from "../errors/BaseError"
-import { CreateCommentInputDTO } from "../dtos/CommentDTO"
-import { LikeDislikeCommentInputDTO } from "../dtos/CommentDTO"
+import { CreateCommentInputDTO } from "../dtos/commentDto"
+import { LikeDislikeCommentInputDTO } from "../dtos/commentDto"
 import { GetCommentInputDTO } from "../Types"
 
 

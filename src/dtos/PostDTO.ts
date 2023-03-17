@@ -1,5 +1,5 @@
 
-import { PostModel } from './../types';
+import { PostModel } from '../types';
 
 export interface GetPostsInput {
     token: string | undefined
