@@ -4,7 +4,7 @@ import { UserDatabase } from "../database/UserDatabase"
 import { BaseError } from "../errors/BaseError"
 import { User } from "../models/User"
 import { UserDB } from "../types"
-import { GetUsersInput, LoginInput, SignupInput } from "../dtos/userDTO"
+import { GetUsersInput, LoginInput, SignupInput } from "../dtos/UserDTO"
 
 
 export class UserController {
