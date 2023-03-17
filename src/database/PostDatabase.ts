@@ -1,6 +1,6 @@
 import { Post } from "../models/Post";
 import { PostDB, UpdatedPost } from "../types";
-import { BaseDatabase } from "../database/BaseDatabase"
+import { BaseDatabase } from "./BaseDatabase";
 import { PostCreatorDB } from "../types";
 import { LikeDislikeDB } from "../types";
 import { POST_LIKE } from "../types";
