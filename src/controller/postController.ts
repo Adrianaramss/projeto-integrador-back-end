@@ -1,10 +1,10 @@
 import { Request, Response } from "express"
 import {PostBusiness} from "../business/PostBusiness"
 import { BaseError } from "../errors/BaseError"
-import { CreatePostInputDTO, EditPostInputDTO, GetPostsInput } from "../dtos/postDTO"
-import { DeletePostInputDTO } from "../dtos/postDTO"
-import { LikesDislikesInputDTO } from "../dtos/likeDislikeDTO"
-import { GetPostInput } from "../dtos/postDTO"
+import { CreatePostInputDTO, EditPostInputDTO, GetPostsInput } from "../dtos/PostDTO"
+import { DeletePostInputDTO } from "../dtos/PostDTO"
+import { LikesDislikesInputDTO } from "../dtos/LikeDislikeDTO"
+import { GetPostInput } from "../dtos/PostDTO"
 
 export class PostController {
     constructor(
