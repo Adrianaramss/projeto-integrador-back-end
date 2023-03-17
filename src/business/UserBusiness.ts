@@ -6,7 +6,7 @@ import { User } from "../models/User"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager } from "../services/TokenManager"
 import { TokenPayload } from "../services/TokenManager"
-import { UserDB } from "../Types"
+import { UserDB } from "../types"
 
 
 

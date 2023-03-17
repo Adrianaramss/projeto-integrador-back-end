@@ -4,7 +4,7 @@ import {  GetCommentsInputDTO} from "../dtos/commentDto"
 import { BaseError } from "../errors/BaseError"
 import { CreateCommentInputDTO } from "../dtos/commentDto"
 import { LikeDislikeCommentInputDTO } from "../dtos/commentDto"
-import { GetCommentInputDTO } from "../Types"
+import { GetCommentInputDTO } from "../types"
 
 
 

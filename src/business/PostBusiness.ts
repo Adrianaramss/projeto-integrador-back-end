@@ -1,7 +1,7 @@
 import { PostDatabase } from "../database/PostDatabase"
 import { UserDatabase } from "../database/UserDatabase"
 import { BadRequestError } from "../errors/BadRequestError"
-import { Post } from "../models/post"
+import { Post } from "../models/Post"
 import { PostCreatorDB } from "../types"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager } from "../services/TokenManager"

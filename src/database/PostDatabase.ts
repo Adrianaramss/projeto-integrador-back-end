@@ -1,4 +1,4 @@
-import { Post } from "../models/post";
+import { Post } from "../models/Post";
 import { PostDB, UpdatedPost } from "../types";
 import { BaseDatabase } from "../database/BaseDatabase"
 import { PostCreatorDB } from "../types";
