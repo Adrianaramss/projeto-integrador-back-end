@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
-import { userRouter } from './Router/userRouter'
-import { postRouter } from './Router/postRouter'
-import { commentRouter} from './Router/commentRouter'
+import { userRouter } from './router/userRouter'
+import { postRouter } from './router/postRouter'
+import { commentRouter} from './router/commentRouter'
 import dotenv from "dotenv"
 import cors from "cors"
 
