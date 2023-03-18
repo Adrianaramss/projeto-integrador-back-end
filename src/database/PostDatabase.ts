@@ -1,5 +1,4 @@
-import { Post } from "../models/Post";
-import { PostDB, UpdatedPost } from "../types";
+import { PostDB } from "../types";
 import { BaseDatabase } from "./BaseDatabase";
 import { PostCreatorDB } from "../types";
 import { LikeDislikeDB } from "../types";

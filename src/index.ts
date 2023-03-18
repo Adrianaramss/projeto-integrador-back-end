@@ -16,7 +16,6 @@ app.listen(3003, () => {
 })
 
 
-
 app.use("/users", userRouter)
 app.use("/posts", postRouter )
 app.use("/comment", commentRouter)
