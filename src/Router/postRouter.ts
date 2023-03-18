@@ -6,7 +6,6 @@ import { IdGenerator } from '../services/IdGenerator'
 import { TokenManager } from '../services/TokenManager'
 
 export const postRouter = express.Router()
-// const userController = new UserController()
 const postController = new PostController(
     new PostBusiness(
         new PostDatabase(),
@@ -14,8 +13,8 @@ const postController = new PostController(
         new TokenManager()
     )
 )
-
-postRouter.get("/",  postController.getPosts)
+ 
+postRouter.get("/",postController.getPosts)
 
 postRouter.post("/", postController.createPost)
 
