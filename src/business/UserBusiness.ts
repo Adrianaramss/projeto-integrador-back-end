@@ -1,11 +1,10 @@
 import { UserDatabase } from "../database/UserDatabase"
-import { GetUsersInput, GetUsersOutput, LoginInput, LoginOutput, SignupInput, SignupOutput } from "../dtos/userDTO"
+import { GetUsersInput, GetUsersOutput, SignupInput, SignupOutput, LoginInput, LoginOutput } from "../dtos/userDTO"
 import { BadRequestError } from "../errors/BadRequestError"
 import { NotFoundError } from "../errors/NotFoundErro"
 import { User } from "../models/User"
 import { IdGenerator } from "../services/IdGenerator"
-import { TokenManager } from "../services/TokenManager"
-import { TokenPayload } from "../services/TokenManager"
+import { TokenManager, TokenPayload } from "../services/TokenManager"
 import { UserDB } from "../types"
 
 
