@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express'
+import cors from 'cors'
+import dotenv from 'dotenv'
 import { userRouter } from './router/userRouter'
 import { postRouter } from './router/postRouter'
 import { commentRouter} from './router/commentRouter'
-import dotenv from "dotenv"
-import cors from "cors"
+
 
 dotenv.config()
 const app = express()
