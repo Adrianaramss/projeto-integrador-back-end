@@ -1,20 +1,15 @@
+import { CommentDatabase } from "../database/CommentDatabase"
 import { PostDatabase } from "../database/PostDatabase"
 import { UserDatabase } from "../database/UserDatabase"
+import { LikesDislikesInputDTO } from "../dtos/likedislikeDTO"
+import { GetPostInput, GetPostsOutput, CreatePostInputDTO, EditPostInputDTO, DeletePostInputDTO } from "../dtos/postDTO"
 import { BadRequestError } from "../errors/BadRequestError"
+import { NotFoundError } from "../errors/NotFoundErro"
 import { Post } from "../models/Post"
-import { PostCreatorDB } from "../types"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager } from "../services/TokenManager"
-import { EditPostInputDTO } from "../dtos/postDTO"
-import { GetPostsOutput } from "../dtos/postDTO"
-import { CreatePostInputDTO } from "../dtos/postDTO"
-import { DeletePostInputDTO } from "../dtos/postDTO"
-import { NotFoundError } from "../errors/NotFoundErro"
-import { LikeDislikeDB } from "../types"
-import { LikesDislikesInputDTO } from "../dtos/likedislikeDTO"
-import { POST_LIKE } from "../types"
-import { GetPostInput } from "../dtos/postDTO"
-import { CommentDatabase } from "../database/CommentDatabase"
+import { PostCreatorDB, LikeDislikeDB, POST_LIKE } from "../types"
+
 
 export class PostBusiness {
     

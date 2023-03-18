@@ -1,5 +1,6 @@
-import { CommentWithCreatorDB,CommentDB, LikeDislikeCommentDB,COMMENT_LIKE } from "../types";
+import { CommentWithCreatorDB, CommentDB, LikeDislikeCommentDB, COMMENT_LIKE } from "../types";
 import { BaseDatabase } from "./BaseDatabase";
+
 
 export class CommentDatabase extends BaseDatabase {
     static getCommentWithCreators() {

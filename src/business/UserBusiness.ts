@@ -4,8 +4,8 @@ import { BadRequestError } from "../errors/BadRequestError"
 import { NotFoundError } from "../errors/NotFoundErro"
 import { User } from "../models/User"
 import { IdGenerator } from "../services/IdGenerator"
-import { TokenManager, TokenPayload } from "../services/TokenManager"
-import { UserDB } from "../types"
+import { TokenManager } from "../services/TokenManager"
+import { TokenPayload, UserDB } from "../types"
 
 
 

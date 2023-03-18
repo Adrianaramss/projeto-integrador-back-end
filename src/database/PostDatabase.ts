@@ -1,8 +1,9 @@
-import { PostDB } from "../types";
-import { BaseDatabase } from "./BaseDatabase";
-import { PostCreatorDB } from "../types";
-import { LikeDislikeDB } from "../types";
-import { POST_LIKE } from "../types";
+import { PostCreatorDB, PostDB, LikeDislikeDB, POST_LIKE } from "../types"
+import { BaseDatabase } from "./BaseDatabase"
+
+
+
+
 export class PostDatabase extends BaseDatabase {
     public static TABLE_POSTS = "posts"
     public static TABLE_LIKES_DISLIKES = "likes_dislikes"
