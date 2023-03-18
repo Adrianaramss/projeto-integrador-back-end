@@ -1,7 +1,7 @@
 import { CommentDatabase } from "../database/CommentDatabase"
 import { PostDatabase } from "../database/PostDatabase"
 import { UserDatabase } from "../database/UserDatabase"
-import { LikesDislikesInputDTO } from "../dtos/likedislikeDTO"
+import { LikesDislikesInputDTO } from "../dtos/likeDislikeDTO"
 import { GetPostInput, GetPostsOutput, CreatePostInputDTO, EditPostInputDTO, DeletePostInputDTO } from "../dtos/postDTO"
 import { BadRequestError } from "../errors/BadRequestError"
 import { NotFoundError } from "../errors/NotFoundErro"
