@@ -1,6 +1,6 @@
 import express from "express"
 import { CommentBusiness } from "../business/CommentBusiness"
-import { CommentController } from "../controller/CommentController"
+import { CommentController } from "../controller/commentController"
 import { CommentDatabase } from "../database/CommentDatabase"
 import { PostDatabase } from "../database/PostDatabase"
 import { IdGenerator } from "../services/IdGenerator"

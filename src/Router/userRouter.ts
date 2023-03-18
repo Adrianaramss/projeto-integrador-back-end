@@ -1,5 +1,5 @@
 import express from 'express'
-import { UserController } from "../controller/UserController";
+import { UserController } from "../controller/userController";
 import { UserBusiness } from '../business/UserBusiness';
 import { UserDatabase } from '../database/UserDatabase';
 import { IdGenerator } from '../services/IdGenerator';
