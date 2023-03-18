@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { userRouter } from './router/userRouter'
-import { postRouter } from './router/postRouter'
-import { commentRouter} from './router/commentRouter'
+import { userRouter } from './Router/userRouter'
+import { postRouter } from './Router/postRouter'
+import { commentRouter} from './Router/commentRouter'
 
 
 dotenv.config()
