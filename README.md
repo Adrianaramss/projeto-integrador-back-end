@@ -41,7 +41,7 @@ O Projeto LabEdit é uma rede social com o objetivo de promover a conexão e int
 https://documenter.getpostman.com/view/24460801/2s93Jxrgx8
 
 ## Deploy 
-- vercel
+- render
 [Labeddit](https://projeto-integrador-back-end-l7sx.onrender.com)
 
 ## Como executar o projeto 
